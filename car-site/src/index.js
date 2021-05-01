@@ -5,7 +5,7 @@ import './index.css';
 
 class Result extends React.Component {
 	render() {
-		let car_name = this.props.name, 
+		let car_name = this.props.year + " " + this.props.make + " " +this.props.model, 
 			vin = this.props.vin,
 			dealerCost = this.props.dealerCost,
 			dateListed = this.props.dateListed;
@@ -32,18 +32,23 @@ class Result extends React.Component {
 class SearchBox extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {search: ""};
+		this.state = {search: "", results: []};
 	}
 	
 	searchCars = (e) => {
-		this.setState({search: e.target.value});
+		var query = e.target.value.toLowerCase();
+		if (query.length >= 1)
+		this.setState({
+			search: query, 
+			results: this.props.results.filter(res =>
+				res.model ? res.model.toLowerCase().includes(query) : false
+			)});
+		else
+			this.setState({results: []});
 	}
 	
 	render() {
-		var results = [{vin:"123", name:"car1", dealerCost:1.23, dateListed:"05/01/2021"},
-			{vin:"234", name:"car2", dealerCost:2.34, dateListed:"05/01/2021"},
-			{vin:"345", name:"car3", dealerCost:3.45, dateListed:"05/01/2021"},
-		];
+		var results = this.state.results
 		return (
 			<div>
 				<input 
@@ -54,7 +59,9 @@ class SearchBox extends React.Component {
 				{results.map(i => {
 					return <Result 
 						vin={i.vin} 
-						name={i.name}
+						make={i.make}
+						model={i.model}
+						year={i.year}
 						dealerCost={i.dealerCost} 
 						dateListed={i.dateListed} />
 				})}
@@ -102,7 +109,7 @@ class Selector extends React.Component {
 		return (
 			<div className="selector">
 				<div>Loaded entries {results.length}</div>
-				<SearchBox />
+				<SearchBox results={results}/>
 			</div>
 		);
 	}

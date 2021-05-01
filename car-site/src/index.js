@@ -27,7 +27,7 @@ class Result extends React.Component {
 					<AccordionSummary
 						style={{backgroundColor: color}}
 						id="panel1a-header">
-						<div>{year} {make} {model}</div> <div style={{float: "right"}}>${askingPrice}</div>
+						<div>{year} {make} {model}</div> <div style={{marginLeft: "auto"}}>${askingPrice}</div>
 					</AccordionSummary>
 					<AccordionDetails style={{backgroundColor: "#D3D3D3"}}>
 						<Typography>
@@ -35,28 +35,19 @@ class Result extends React.Component {
 								ID: {id}
 							</div>
 							<div name="car-lot-name">
-								LOT_NAME: {lot_name}
-							</div>
-							<div name="car-lot-city">
-								LOT_CITY: {lot_city}
-							</div>
-							<div name="car-lot-country">
-								LOT_COUNTRY: {lot_country}
+								Lot: {lot_name} of ({lot_city}, {lot_country})
 							</div>
 							<div name="car-vin">
 								VIN: {vin}
 							</div>
-							<div name="car-askingprice">
-								ASKINGPRICE: {askingPrice}
-							</div>
 							<div name="car-dealercost">
-								DEALERCOST: {dealerCost}
+								Dealer cost: {dealerCost}
 							</div>
 							<div name="car-color">
-								COLOR: {color}
+								Color: {color}
 							</div>
 							<div name="car-datelisted">
-								DATELISTED: {dateListed}
+								Date listed: {dateListed}
 							</div>
 						</Typography>
 					</AccordionDetails>
@@ -106,7 +97,7 @@ class SearchBox extends React.Component {
 					placeholder="Search for a car" 
 					type="text" 
 				/>
-				{results.map(i => {
+				{results.slice(0, 20).map(i => {
 					return <Result 
 						val={i} />
 				})}

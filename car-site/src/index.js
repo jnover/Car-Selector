@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
-
+//var json = require('./MOCK_DATA.json');
 
 class Result extends React.Component {
 	render() {
@@ -65,9 +64,44 @@ class SearchBox extends React.Component {
 }
 
 class Selector extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			error: null,
+			isLoaded: false,
+			results: []
+		};
+	}
+
+	componentDidMount() {
+		fetch("./MOCK_DATA.json")
+		.then(res => res.json())
+		.then(
+			(result) => {
+			this.setState({
+				isLoaded: true,
+				results: result
+		});
+	},
+	(error) => {
+		this.setState({
+			isLoaded: true,
+			error
+			});
+		})
+	}
+	
 	render() {
+		const {error, isLoaded, results} = this.state;
+		if (error) {
+			return <div className="error">Error: {error.message}</div>;
+		}
+		else if (!isLoaded) {
+			return <div className="loading">Loading...</div>;
+		}
 		return (
 			<div className="selector">
+				<div>Loaded entries {results.length}</div>
 				<SearchBox />
 			</div>
 		);

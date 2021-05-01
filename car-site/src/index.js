@@ -18,17 +18,18 @@ class Result extends React.Component {
 			vin = this.props.val.vin,
 			askingPrice = this.props.val.askingPrice,
 			dealerCost = this.props.val.dealerCost,
-			color = this.props.val.color,
+			color = this.props.val.color || "white",
 			dateListed = this.props.val.dateListed;
 			
 		return (
 			<div className="car-information">
 				<Accordion>
 					<AccordionSummary
+						style={{backgroundColor: color}}
 						id="panel1a-header">
-						{make} {model} {year}
+						<div>{year} {make} {model}</div> <div style={{float: "right"}}>${askingPrice}</div>
 					</AccordionSummary>
-					<AccordionDetails>
+					<AccordionDetails style={{backgroundColor: "#D3D3D3"}}>
 						<Typography>
 							<div name="car-id">
 								ID: {id}
@@ -100,6 +101,7 @@ class SearchBox extends React.Component {
 		return (
 			<div>
 				<input 
+					className="search-input"
 					onChange={this.searchCars}
 					placeholder="Search for a car" 
 					type="text" 

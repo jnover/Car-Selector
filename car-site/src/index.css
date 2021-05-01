@@ -1,20 +1,30 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: #FFCB9C;
+}
+
+.search-input {
+	font-size: 20px;
+	
 }
 
 .selector {
 	color: green;
-	font-size: 24;
+	font-size: 24px;
 	text-align: center;
 	padding: 20px 100px;
 }
 
 .loading {
 	color: orange;
+	font-size: 50px;
+	text-align: center;
 }
 
 .car-information {
-	text-align: center;
+	text-align: left;
+	padding: 1% 30%;
 	
 }
+

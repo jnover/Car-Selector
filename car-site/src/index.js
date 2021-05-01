@@ -1,29 +1,61 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-//var json = require('./MOCK_DATA.json');
 
 class Result extends React.Component {
 	render() {
-		let car_name = this.props.year + " " + this.props.make + " " +this.props.model, 
-			vin = this.props.vin,
-			dealerCost = this.props.dealerCost,
-			dateListed = this.props.dateListed;
-		
+		let id = this.props.val.id,
+			lot_name = this.props.val.lot.name,
+			lot_city = this.props.val.lot.city,
+			lot_country = this.props.val.lot.country,
+			make = this.props.val.make,
+			model = this.props.val.model,
+			year = this.props.val.year,
+			vin = this.props.val.vin,
+			askingPrice = this.props.val.askingPrice,
+			dealerCost = this.props.val.dealerCost,
+			color = this.props.val.color,
+			dateListed = this.props.val.dateListed;
+			
 		return (
 			<div className="car-information">
+				<div name="car-id">
+					ID: {id}
+				</div>
+				<div name="car-lot-name">
+					LOT_NAME: {lot_name}
+				</div>
+				<div name="car-lot-city">
+					LOT_CITY: {lot_city}
+				</div>
+				<div name="car-lot-country">
+					LOT_COUNTRY: {lot_country}
+				</div>
+				<div name="car-make">
+					MAKE: {make}
+				</div>
+				<div name="car-model">
+					MODEL: {model}
+				</div>
+				<div name="car-year">
+					YEAR: {year}
+				</div>
 				<div name="car-vin">
 					VIN: {vin}
 				</div>
-				<div name="car-name">
-					NAME: {car_name}
+				<div name="car-askingprice">
+					ASKINGPRICE: {askingPrice}
 				</div>
 				<div name="car-dealercost">
 					DEALERCOST: {dealerCost}
 				</div>
+				<div name="car-color">
+					COLOR: {color}
+				</div>
 				<div name="car-datelisted">
 					DATELISTED: {dateListed}
 				</div>
+				<br></br>
 			</div>
 		);
 	}
@@ -37,12 +69,24 @@ class SearchBox extends React.Component {
 	
 	searchCars = (e) => {
 		var query = e.target.value.toLowerCase();
-		if (query.length >= 1)
-		this.setState({
-			search: query, 
-			results: this.props.results.filter(res =>
-				res.model ? res.model.toLowerCase().includes(query) : false
-			)});
+		if (query.length >= 2) { // less strain on the searching
+			this.setState({
+				search: query, 
+				// Horrendous if statement, I previously attempted using some().
+				results: this.props.results.filter(res =>
+					(res.id && res.id.toLowerCase().includes(query)) 
+					|| (res.lot && (res.lot.name.toLowerCase().includes(query) || res.lot.city.toLowerCase().includes(query) || res.lot.country.toLowerCase().includes(query))) 
+					|| (res.make && res.make.toLowerCase().includes(query)) 
+					|| (res.model && res.model.toLowerCase().includes(query)) 
+					|| (res.year && res.year.toString().includes(query)) 
+					|| (res.vin && res.vin.toLowerCase().includes(query)) 
+					|| (res.askingPrice && res.askingPrice.toString().includes(query)) 
+					|| (res.dealerCost && res.dealerCost.toString().includes(query)) 
+					|| (res.color && res.color.toLowerCase().includes(query)) 
+					|| (res.dateListed && res.dateListed.toLowerCase().includes(query))
+				)
+			});
+		}
 		else
 			this.setState({results: []});
 	}
@@ -58,12 +102,7 @@ class SearchBox extends React.Component {
 				/>
 				{results.map(i => {
 					return <Result 
-						vin={i.vin} 
-						make={i.make}
-						model={i.model}
-						year={i.year}
-						dealerCost={i.dealerCost} 
-						dateListed={i.dateListed} />
+						val={i} />
 				})}
 			</div>
 		);

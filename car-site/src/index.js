@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
 import './index.css';
 
 class Result extends React.Component {
@@ -19,43 +23,43 @@ class Result extends React.Component {
 			
 		return (
 			<div className="car-information">
-				<div name="car-id">
-					ID: {id}
-				</div>
-				<div name="car-lot-name">
-					LOT_NAME: {lot_name}
-				</div>
-				<div name="car-lot-city">
-					LOT_CITY: {lot_city}
-				</div>
-				<div name="car-lot-country">
-					LOT_COUNTRY: {lot_country}
-				</div>
-				<div name="car-make">
-					MAKE: {make}
-				</div>
-				<div name="car-model">
-					MODEL: {model}
-				</div>
-				<div name="car-year">
-					YEAR: {year}
-				</div>
-				<div name="car-vin">
-					VIN: {vin}
-				</div>
-				<div name="car-askingprice">
-					ASKINGPRICE: {askingPrice}
-				</div>
-				<div name="car-dealercost">
-					DEALERCOST: {dealerCost}
-				</div>
-				<div name="car-color">
-					COLOR: {color}
-				</div>
-				<div name="car-datelisted">
-					DATELISTED: {dateListed}
-				</div>
-				<br></br>
+				<Accordion>
+					<AccordionSummary
+						id="panel1a-header">
+						{make} {model} {year}
+					</AccordionSummary>
+					<AccordionDetails>
+						<Typography>
+							<div name="car-id">
+								ID: {id}
+							</div>
+							<div name="car-lot-name">
+								LOT_NAME: {lot_name}
+							</div>
+							<div name="car-lot-city">
+								LOT_CITY: {lot_city}
+							</div>
+							<div name="car-lot-country">
+								LOT_COUNTRY: {lot_country}
+							</div>
+							<div name="car-vin">
+								VIN: {vin}
+							</div>
+							<div name="car-askingprice">
+								ASKINGPRICE: {askingPrice}
+							</div>
+							<div name="car-dealercost">
+								DEALERCOST: {dealerCost}
+							</div>
+							<div name="car-color">
+								COLOR: {color}
+							</div>
+							<div name="car-datelisted">
+								DATELISTED: {dateListed}
+							</div>
+						</Typography>
+					</AccordionDetails>
+				</Accordion>
 			</div>
 		);
 	}

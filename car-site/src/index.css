@@ -3,6 +3,18 @@ body {
   margin: 20px;
 }
 
-ol, ul {
-  padding-left: 30px;
+.selector {
+	color: green;
+	font-size: 24;
+	text-align: center;
+	padding: 20px 100px;
+}
+
+.loading {
+	color: orange;
+}
+
+.car-information {
+	text-align: center;
+	
 }

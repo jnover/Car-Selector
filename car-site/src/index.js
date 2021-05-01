@@ -41,7 +41,7 @@ class Result extends React.Component {
 								VIN: {vin}
 							</div>
 							<div name="car-dealercost">
-								Dealer cost: {dealerCost}
+								Dealer cost: ${dealerCost}
 							</div>
 							<div name="car-color">
 								Color: {color}
